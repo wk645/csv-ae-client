@@ -1,0 +1,9 @@
+.spendingBox {
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-style: solid;
+    width: 80%;
+    position: relative;
+    margin: auto;
+}

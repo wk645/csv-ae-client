@@ -1,0 +1,9 @@
+const PROCESS_REQUEST = 'app/uploads/PROCESS_REQUEST';
+const PROCESS_SUCCESS = 'app/uploads/PROCESS_SUCCESS';
+const PROCESS_FAILURE = 'app/uploads/PROCESS_FAILURE';
+
+export default {
+    PROCESS_REQUEST,
+    PROCESS_SUCCESS,
+    PROCESS_FAILURE
+}
