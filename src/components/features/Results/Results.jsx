@@ -1,56 +1,34 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { selectors as uploadSelectors } from '../../../store/uploads';
+import Card from '../Card/Card';
 
 import './Results.css';
 
-export default class Results extends React.Component {
-    constructor() {
-        super();
+const Results = ({ processedCSV }) => {
+    let expenseCard = processedCSV[0].spendings.map((p) => <Card key={p.Reference} data={p} />);
 
-        this.state = {
-            newTotal: 0
-        }
-    }
-    onClick = (number) => {
-        console.log('inside submit', number);
-        const dividedNum = this.props.data.Total / number;
-        this.setState({
-            newTotal: dividedNum
-        });
-
-        console.log('nnnew', this.state.newTotal);
-    }
-
-    render() {
-        return (
-            <div>
-                <div id="spendingTotal">
-                    {this.props.data ? <p>Total: ${this.props.data.Total}</p> : null}
-                </div>
-                {this.props.data ?
-                    <div>
-                        <span>Divide By: </span>
-                        <button type="submit" onClick={() => this.onClick(4)}>4</button>
-                        <button type="submit"  onClick={() => this.onClick(5)}>5</button>
-                    </div> : null
-                }
-                {/* <div>
-                    {this.state.newTotal}
-                </div> */}
-                {
-                    this.props.data
-                        ? this.props.data.Spendings.map(s => <div key={s.Reference}>
-                            <p>{s.Total}</p>
-                            <div key={s.Reference} className="spendingBox">
-                            <p>Date: {s.Date}</p>
-                            <p>Amount: {s.Amount}</p>
-                            <p>Addt. Info: {s.AdditionalInformation}</p>
-                            <p>Description: {s.Description}</p>
-                            <p>Category: {s.Category}</p>
-                            </div>
-                        </div>)
-                        : null
-                }
-            </div>
-        );
-    }
+    return (
+        <div>
+            <br />
+            <hr />
+            {console.log('passed', processedCSV)}
+            <h3>Date Range: {processedCSV[0].dateRange}</h3>
+            <h3>Total: ${processedCSV[0].total}</h3>
+            {expenseCard}
+        </div>
+    );
 }
+
+const mapStateToProps = (state) => ({
+    processedCSV: uploadSelectors.getProcessedCSV(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Results);

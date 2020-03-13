@@ -1,0 +1,9 @@
+.cardDiv {
+    border-style: solid;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.cardLine {
+    margin-left: 10px;
+}

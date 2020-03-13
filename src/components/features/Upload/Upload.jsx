@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // import { push } from 'connected-react-router';
 import { selectors as uploadsSelectors, actions as uploadsActions } from '../../../store/uploads';
 
-// import Results from '../Results/Results';
+import Results from '../Results/Results';
 
 import './Upload.css';
 
@@ -14,7 +14,6 @@ const Uploads = ({ isProcessing, didProcess, onSubmit, processedCSV }) => {
 
     const handleInput = React.useCallback(
         (event) => {
-            console.log('inside handleinput', event.target.files[0]);
             setFile(event.target.files[0]);
         },
         [setFile]
@@ -24,28 +23,27 @@ const Uploads = ({ isProcessing, didProcess, onSubmit, processedCSV }) => {
         (event) => {
             event.preventDefault();
             const formData = new FormData();
-            console.log('inside handleSubmit', file);
             formData.append('aeFile', file);
-            console.log('fff', formData);
             onSubmit(formData);
         },
         [onSubmit, file]
     );
 
+    const handleClear = React.useCallback(() => {
+        setFile(null);
+    }, [setFile]);
+
     return (
         <div>
             <h1>Upload Expense CSV</h1>
-            <p>Upload American Express Expense CSV.</p>
-
+            <p>Upload American Express CSV file for an in-depth view.</p>
+            <br />
             <form onSubmit={handleSubmit}>
                 <input type="file" required onChange={handleInput} />
                 <button type="submit">Upload</button>
+                <button type="reset" onClick={handleClear}>Reset</button>
             </form>
-            {processedCSV && (
-                <div>
-                    {processedCSV}
-                </div>
-            )}
+            {processedCSV && <Results />}
         </div>
     );
 }
@@ -64,12 +62,11 @@ Uploads.defaultProps = {
 const mapStateToProps = (state) => ({
     isProcessing: uploadsSelectors.getIsProcessing(state),
     didProcess: uploadsSelectors.getDidProcess(state),
-    getProcessedCSV: uploadsSelectors.getProcessedCSV(state)
+    processedCSV: uploadsSelectors.getProcessedCSV(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onSubmit(data) {
-        console.log('ddd', data);
         dispatch(uploadsActions.upload(data));
     }
 });

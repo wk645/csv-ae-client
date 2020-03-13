@@ -1,14 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Results from './features/Results/Results';
 import Upload from './features/Upload/Upload';
+
+import './App.css';
 
 class App extends React.Component {
     render() {
         return (
-            <div>
+            <div className="mainAppDiv">
                 <Switch>
                     <Route exact path="/" component={Upload} />
                     <Route exact path="/results" component={Results} />
