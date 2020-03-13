@@ -35,7 +35,7 @@ const Uploads = ({ isProcessing, didProcess, onSubmit, processedCSV }) => {
 
     return (
         <div>
-            <h1>Upload Expense CSV</h1>
+            <h2>Upload Expense CSV</h2>
             <p>Upload American Express CSV file for an in-depth view.</p>
             <br />
             <form onSubmit={handleSubmit}>
