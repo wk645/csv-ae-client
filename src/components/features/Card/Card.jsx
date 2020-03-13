@@ -1,5 +1,4 @@
 import React from 'react';
-// import { selectors as uploadSelectors } from '../../../store/uploads';
 
 import './Card.css';
 

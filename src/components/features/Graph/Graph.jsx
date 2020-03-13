@@ -20,7 +20,6 @@ const Graph = ({ processedCSV, navigateTo }) => {
 
     let filteredCards = graphCategory && processedCSV[0].spendings.filter((p) => p.Category === graphCategory.x);
     let expenseCard = graphCategory && filteredCards.map((f) => <Card key={f.Reference} data={f} />);
-    console.log('eee', expenseCard);
 
     let graphObject = processedCSV[0].spendings.map((d) => {
         const xValue = xValues.find(c => c === d.Category);
