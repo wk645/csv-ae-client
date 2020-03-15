@@ -20,7 +20,7 @@ class App extends React.Component {
                     <Route exact path="/" component={Upload} />
                     <Route exact path="/results" component={Results} />
                     <Route exact path="/detailedGraph" component={Graph} />
-                    <Route exact path="/csv" component={Files} />
+                    <Route exact path="/trend" component={Files} />
                 </Switch>
             </div>
         );

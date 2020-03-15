@@ -11,7 +11,6 @@ const Files = () => {
     const [files, setFiles] = React.useState(null);
     const handleRetrieveClick = (event) => {
         event.preventDefault();
-        console.log('retrieve clicked!');
         let ref = fire.database().ref('graphs/');
         ref.on('value', (snapshot) => {
             setFiles(Object.values(snapshot.val()));
@@ -22,6 +21,7 @@ const Files = () => {
 
     return (
         <div className="filesDiv">
+            <br />
             <Button size="large" color="black" type="submit" onClick={handleRetrieveClick}>Retrieve</Button>
             <LineGraph files={files} />
         </div>

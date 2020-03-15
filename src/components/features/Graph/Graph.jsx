@@ -20,7 +20,7 @@ const Graph = ({ processedCSV }) => {
     const x = ['Business', 'Entertainment', 'Groceries', 'Merchandise', 'Miscellaneous', 'Restaurant', 'Supplies', 'Transportation', 'Travel'];
 
     let currentTotal = 0;
-    let filteredCards = graphCategory && processedCSV[0].spendings.filter((p) => p.Category === graphCategory.x);
+    let filteredCards = graphCategory && processedCSV[0].spendings.filter((p) => p.Category === graphCategory);
     let expenseCard = graphCategory && filteredCards.map((f) =>{
         currentTotal += Number(f.Amount);
         return <Card key={f.Reference} data={f} />
@@ -98,9 +98,11 @@ const Graph = ({ processedCSV }) => {
         }
     };
 
-    // const onSeriesClick = React.useCallback((datapoint) => {
-    //     setGraphCategory(datapoint);
-    // }, [setGraphCategory]);
+    const onSeriesClick = React.useCallback((dataset) => {
+        const clickedIndex = dataset[0]._index;
+        const category = x[clickedIndex];
+        setGraphCategory(category);
+    }, [setGraphCategory, x]);
 
     return (
         <div className="graphDiv">
@@ -117,6 +119,7 @@ const Graph = ({ processedCSV }) => {
                         display: false
                     }
                 }}
+                getElementAtEvent={onSeriesClick}
             />
             <div className="graphDiv-categorized">
                 {
@@ -124,8 +127,8 @@ const Graph = ({ processedCSV }) => {
                     <div className="graphDiv-cards">
                         <br />
                         <div className="graphDiv-category-summary">
-                            <span>{graphCategory.x} </span>
-                            <span>({expenseCard.length}) </span>
+                            <span>{graphCategory}</span>
+                            <span>{expenseCard.length} item(s) </span>
                             <span>${Math.floor(currentTotal)}</span>
                         </div>
                         <br />
@@ -149,10 +152,6 @@ const mapStateToProps = (state) => ({
     processedCSV: uploadsSelectors.getProcessedCSV(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-});
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(Graph);

@@ -5,8 +5,6 @@ import { Line } from 'react-chartjs-2';
 import './LineGraph.css';
 
 const LineGraph = ({ files }) => {
-    console.log('inside line graph', files);
-
     const data = () => {
         let i = 1;
         const totalLabels = [];
@@ -52,18 +50,21 @@ const LineGraph = ({ files }) => {
         <div className="lineGraphDiv">
             <br />
             { files ?
-                <Line
-                    data={data}
-                    options={{
-                        title: {
-                            display: true,
-                            text: 'Your Spendings Trend'
-                        },
-                        legend: {
-                            display: false
-                        }
-                    }}
-                />
+                <div>
+                    <Line
+                        data={data}
+                        options={{
+                            title: {
+                                display: true,
+                                text: 'Your Spendings Trend',
+                                fontSize: 25
+                            },
+                            legend: {
+                                display: false
+                            }
+                        }}
+                    />
+                </div>
             : null}
         </div>
     );

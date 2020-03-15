@@ -14,7 +14,6 @@ const Results = ({ processedCSV, navigateTo }) => {
     let expenseCard = processedCSV[0].spendings.map((p) => <Card key={p.Reference} data={p} />);
 
     const handleGraphClick = React.useCallback(() => {
-        console.log('inside graph click button');
         navigateTo('/detailedGraph');
     }, [navigateTo]);
 
@@ -26,7 +25,6 @@ const Results = ({ processedCSV, navigateTo }) => {
 
     const handleSaveClick = (event) => {
         event.preventDefault();
-        console.log('clicked save!');
         fire.database().ref('graphs/').push(processedCSV[0]).set({
             dateRange: processedCSV[0].dateRange,
             total: processedCSV[0].total,
@@ -37,7 +35,6 @@ const Results = ({ processedCSV, navigateTo }) => {
     return (
         <div className="resultsDiv">
             <br />
-            {console.log('passed', processedCSV)}
             <h3>Date Range: {processedCSV[0].dateRange}</h3>
             <h3>Total: ${processedCSV[0].total}</h3>
             <Button size="large" color="green" type="submit" onClick={handleSaveClick}>SAVE</Button>

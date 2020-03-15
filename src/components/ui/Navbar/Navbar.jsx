@@ -15,7 +15,7 @@ export default class Navbar extends Component {
                     <Link className="navbarDiv-graph" to="/detailGraph">Graph</Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link className="navbarDiv-csv" to="/csv">CSV Files</Link>
+                    <Link className="navbarDiv-csv" to="/trend">CSV Files</Link>
                 </Menu.Item>
             </Menu>
         );
