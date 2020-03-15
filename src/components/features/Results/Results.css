@@ -7,3 +7,18 @@
     position: relative;
     margin: auto;
 }
+
+.resultsDiv {
+    margin-top: 20px;
+    position: relative;
+    margin: auto;
+    width: 50%;
+}
+
+.resultsDiv-dividedNum {
+    margin-top: 10px;
+}
+
+span {
+    margin-right: 10px;
+}

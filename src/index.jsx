@@ -4,9 +4,7 @@ import { createBrowserHistory } from 'history';
 import configureStore from './store/configureStore';
 import Root from './components/Root';
 import './index.css';
-// import App from './App.jsx';
-
-// ReactDOM.render(<App />, document.getElementById('root'));
+import 'semantic-ui-css/semantic.min.css';
 
 const history = createBrowserHistory();
 const store = configureStore(history);

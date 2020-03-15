@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectors as uploadSelectors } from '../../../store/uploads';
 import { push } from 'connected-react-router';
+import { Button } from 'semantic-ui-react';
 import Card from '../Card/Card';
 
 import fire from '../../../services/firebase';
@@ -26,29 +27,33 @@ const Results = ({ processedCSV, navigateTo }) => {
     const handleSaveClick = (event) => {
         event.preventDefault();
         console.log('clicked save!');
-        const dateObj = new Date();
-        const formattedDate = `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()}`;
-        fire.database().ref(`${formattedDate}`).push(processedCSV);
+        fire.database().ref('graphs/').push(processedCSV[0]).set({
+            dateRange: processedCSV[0].dateRange,
+            total: processedCSV[0].total,
+            spendings: processedCSV[0].spendings
+        });
     };
 
     return (
-        <div>
+        <div className="resultsDiv">
             <br />
-            <hr />
             {console.log('passed', processedCSV)}
             <h3>Date Range: {processedCSV[0].dateRange}</h3>
             <h3>Total: ${processedCSV[0].total}</h3>
-            <button type="submit" onClick={handleSaveClick}>SAVE</button>
-            <button type="submit" onClick={handleGraphClick}>
+            <Button size="large" color="green" type="submit" onClick={handleSaveClick}>SAVE</Button>
+            <Button size="large" color="teal" type="submit" onClick={handleGraphClick}>
                 GRAPH
-            </button>
-            <button type="submit" onClick={() => handleDivideClick(4)}>
+            </Button>
+            <br />
+            <br />
+            <span>Divide By:</span>
+            <Button size="large" color="black" type="submit" onClick={() => handleDivideClick(4)}>
                 4
-            </button>
-            <button type="submit" onClick={() => handleDivideClick(5)}>
+            </Button>
+            <Button size="large" color="black" type="submit" onClick={() => handleDivideClick(5)}>
                 5
-            </button>
-            <p>{dividedNum}</p>
+            </Button>
+            <p className="resultsDiv-dividedNum">{dividedNum}</p>
             {expenseCard}
         </div>
     );

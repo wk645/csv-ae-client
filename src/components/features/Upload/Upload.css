@@ -1,3 +1,8 @@
 .uploadForm {
     margin-bottom: 20px;
 }
+
+.uploadDiv {
+    text-align: left;
+    margin-left: 20px;
+}

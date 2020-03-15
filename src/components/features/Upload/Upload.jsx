@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { selectors as uploadsSelectors, actions as uploadsActions } from '../../../store/uploads';
 
+import { Button, Input } from 'semantic-ui-react';
+
 import Results from '../Results/Results';
 
 import './Upload.css';
@@ -33,15 +35,18 @@ const Uploads = ({ isProcessing, didProcess, onSubmit, processedCSV }) => {
     }, [setFile]);
 
     return (
-        <div>
+        <div className="uploadDiv">
             <h2>Upload Expense CSV</h2>
             <p>Upload American Express CSV file for an in-depth view.</p>
             <br />
             <form onSubmit={handleSubmit}>
-                <input type="file" required onChange={handleInput} />
-                <button type="submit">Upload</button>
-                <button type="reset" onClick={handleClear}>Reset</button>
+                <Input className="uploadDiv-input" type="file" required onChange={handleInput} />
+                <Button size="large" color="green" type="submit">Upload</Button>
+                <Button size="large" color="red" type="reset" onClick={handleClear}>Reset</Button>
             </form>
+            <br />
+            <br />
+            <hr />
             {processedCSV && <Results />}
         </div>
     );
